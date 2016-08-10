@@ -1,4 +1,4 @@
-package com.valtech.hotel;
+package com.valtech.hotel.frontend;
 
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
