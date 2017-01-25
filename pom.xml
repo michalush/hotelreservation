@@ -95,6 +95,12 @@
 		<!-- JGiven Dependency for testing -->
 		<dependency>
 			<groupId>com.tngtech.jgiven</groupId>
+			<artifactId>jgiven-testng</artifactId>
+			<version>0.14.0</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.tngtech.jgiven</groupId>
 			<artifactId>jgiven-junit</artifactId>
 			<version>0.14.0</version>
 			<scope>test</scope>
