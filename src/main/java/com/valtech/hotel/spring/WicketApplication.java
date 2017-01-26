@@ -1,5 +1,6 @@
-package com.valtech.hotel.frontend;
+package com.valtech.hotel.spring;
 
+import com.valtech.hotel.frontend.HotelSearchPage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -28,6 +29,7 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
 
+		mountPage("search", HotelSearchPage.class);
 		// add your configuration here
 	}
 }

@@ -3,7 +3,7 @@ package com.valtech.hotel.frontend.stages;
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import com.valtech.hotel.frontend.HotelSearchPage;
-import com.valtech.hotel.frontend.WicketApplication;
+import com.valtech.hotel.spring.WicketApplication;
 import org.apache.wicket.util.tester.WicketTester;
 
 public class GivenUserOnHotelPage extends Stage<GivenUserOnHotelPage> {

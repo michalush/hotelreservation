@@ -1,7 +1,7 @@
 package com.valtech.hotel;
 
 import com.valtech.hotel.frontend.HomePage;
-import com.valtech.hotel.frontend.WicketApplication;
+import com.valtech.hotel.spring.WicketApplication;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
