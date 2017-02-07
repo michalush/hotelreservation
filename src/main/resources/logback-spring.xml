@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+
+    <springProperty name="smtp.host" source="logging.smtp.host" />
+    <springProperty name="smtp.port" source="logging.smtp.port" />
+    <springProperty name="smtp.username" source="logging.smtp.username" />
+    <springProperty name="smtp.password" source="logging.smtp.password" />
+    <springProperty name="smtp.fromEmail" source="logging.smtp.fromEmail" />
+    <springProperty name="smtp.toEmail" source="logging.smtp.toEmail" />
+    <springProperty name="logging.path" source="logging.path" />
+    <springProperty name="application.name" source="spring.application.name" />
+
+    <property name="consolePattern"
+              value="%clr(%date{ISO8601}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+    <property name="defaultPattern"
+              value="%date{ISO8601} [%15.15thread] %-5level %X{X-B3-TraceId} [%40.40logger] - %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${consolePattern}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See also http://logback.qos.ch/manual/appenders.html#RollingFileAppender -->
+        <File>${catalina.base}/${logging.path}/${application.name}.log</File>
+        <encoder>
+            <pattern>${defaultPattern}</pattern>
+            <charset>utf8</charset>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- rollover daily -->
+            <fileNamePattern>${catalina.base}/${logging.path}/${application.name}-%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 3MB -->
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+    <logger name="org.apache.http" level="WARN"/>
+    <logger name="org.apache.http.wire" level="ERROR"/>
+
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+    </root>
+
+    <springProfile name="local">
+        <root level="INFO">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+</configuration>

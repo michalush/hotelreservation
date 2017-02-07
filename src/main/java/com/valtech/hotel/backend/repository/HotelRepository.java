@@ -8,6 +8,7 @@ import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class HotelRepository {
     private static final Logger LOG = LoggerFactory.getLogger(HotelRepository.class);
@@ -16,7 +17,7 @@ public class HotelRepository {
     private final Client elasticsearchClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public HotelRepository(Client elasticsearchClient) {
+    public HotelRepository(@Autowired Client elasticsearchClient) {
         this.elasticsearchClient = elasticsearchClient;
     }
 
@@ -27,7 +28,7 @@ public class HotelRepository {
             indexRequestBuilder.setSource(objectMapper.writeValueAsBytes(hotel));
             IndexResponse response = elasticsearchClient.index(indexRequestBuilder.request()).actionGet();
             LOG.info("entry added to index {}, type {}, doc-version: '%s', doc-id: '%s', created: %s\n",
-                    response.getIndex(), response.getType(), response.getVersion(), response.getId(), response.isCreated());
+                    response.getIndex(), response.getType(), response.getVersion(), response.getId(), response.status());
         } catch (JsonProcessingException e) {
             LOG.error("error in processing json!", e);
         }
