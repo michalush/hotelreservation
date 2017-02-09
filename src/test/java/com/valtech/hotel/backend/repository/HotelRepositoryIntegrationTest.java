@@ -32,8 +32,8 @@ public class HotelRepositoryIntegrationTest extends SimpleSpringRuleScenarioTest
         hotel.setName("Motel One");
         hotel.setDescription("Perfect for business trips!");
 
-        given().hotelIsNotPresentWithId("1").
-        when().createHotel(hotel).then().hotelExists("1");
+        given().there_is_no_hotel_with_id("1").
+        when().create_hotel(hotel).then().hotel_with_id_$1_exists("1");
     }
 
     @After
