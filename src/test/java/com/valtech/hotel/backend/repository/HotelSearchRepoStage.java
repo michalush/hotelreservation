@@ -17,19 +17,23 @@ public class HotelSearchRepoStage extends Stage<HotelSearchRepoStage> {
     @Autowired
     private Client elasticsearchClient;
 
-    public HotelSearchRepoStage create_hotel(Hotel hotel) {
+    public HotelSearchRepoStage new_hotel_is_added(Hotel hotel) {
         hotelRepository.add(hotel);
         return this;
     }
 
     public HotelSearchRepoStage hotel_with_id_$1_exists(String id) {
-        final GetResponse response = elasticsearchClient.prepareGet(HotelRepository.HOTEL, HotelRepository.TYPE, id).get();
+        final GetResponse response = getHotelWithId(id);
         assertThat(response.isExists(), is(true));
         return this;
     }
 
+    private GetResponse getHotelWithId(String id) {
+        return elasticsearchClient.prepareGet(HotelRepository.HOTEL, HotelRepository.TYPE, id).get();
+    }
+
     public HotelSearchRepoStage there_is_no_hotel_with_id(String id) {
-        final GetResponse response = elasticsearchClient.prepareGet(HotelRepository.HOTEL, HotelRepository.TYPE, id).get();
+        final GetResponse response = getHotelWithId(id);
         assertThat(response.isExists(), is(false));
         return this;
     }
