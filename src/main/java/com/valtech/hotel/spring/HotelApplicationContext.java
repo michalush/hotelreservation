@@ -16,8 +16,8 @@ import java.net.InetSocketAddress;
 
 @Configuration
 @ComponentScan(basePackages = {"com.valtech.hotel"})
-public class HotelSpringConfig implements EnvironmentAware {
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HotelSpringConfig.class);
+public class HotelApplicationContext implements EnvironmentAware {
+    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HotelApplicationContext.class);
     private Environment env;
 
     @Bean(destroyMethod = "close")

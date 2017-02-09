@@ -3,17 +3,22 @@ package com.valtech.hotel.backend.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.valtech.hotel.backend.entity.Hotel;
+import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
+import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.common.settings.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class HotelRepository {
     private static final Logger LOG = LoggerFactory.getLogger(HotelRepository.class);
-    private static final String HOTEL = "hotels";
-    private static final String TYPE = "hotel";
+    protected static final String HOTEL = "hotels";
+    protected static final String TYPE = "hotel";
     private final Client elasticsearchClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -32,5 +37,19 @@ public class HotelRepository {
         } catch (JsonProcessingException e) {
             LOG.error("error in processing json!", e);
         }
+    }
+
+    public void createIndex() {
+        Settings indexSettings = Settings.builder()
+                .put("number_of_shards", 1)
+                .put("number_of_replicas", 0)
+                .build();
+        CreateIndexRequest indexRequest = new CreateIndexRequest(HOTEL, indexSettings);
+        elasticsearchClient.admin().indices().create(indexRequest).actionGet();
+    }
+
+    public void deleteIndex() {
+        DeleteIndexRequest indexRequest = new DeleteIndexRequest(HOTEL);
+        elasticsearchClient.admin().indices().delete(indexRequest).actionGet();
     }
 }
