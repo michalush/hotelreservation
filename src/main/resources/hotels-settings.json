@@ -1,0 +1,62 @@
+{
+  "index": {
+    "number_of_shards": 1,
+    "number_of_replicas": 0,
+    "analysis": {
+      "tokenizer": {
+        "substring": {
+          "type": "ngram",
+          "min_gram": 1,
+          "max_gram": 20,
+          "token_chars": [
+            "letter",
+            "digit"
+          ]
+        }
+      },
+      "analyzer": {
+        "str_search_analyzer": {
+          "type": "custom",
+          "tokenizer": "whitespace",
+          "filter": [
+            "lowercase"
+          ]
+        },
+        "str_index_analyzer": {
+          "type": "custom",
+          "tokenizer": "substring",
+          "filter": [
+            "lowercase"
+          ]
+        }
+      }
+    }
+//    "mappings": {
+//      "hotel": {
+//        "properties": {
+//          "id": {
+//            "type": "integer"
+//          },
+//          "name": {
+//            "type": "text"
+//            //            "search_analyzer": "str_search_analyzer",
+//            //            "analyzer": "str_index_analyzer",
+//            //            "fields": {
+//            //              "keyword": {
+//            //                "type": "keyword"
+//            //              }
+//            //            }
+//          },
+//          "description": {
+//            "type": "text"
+//            //            "analyzer": "str_index_analyzer"
+//          },
+//          "rating": {
+//            "type": "integer"
+//          }
+//        }
+//      }
+//    }
+  }
+}
+

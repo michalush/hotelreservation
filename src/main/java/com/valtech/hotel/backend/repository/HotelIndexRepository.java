@@ -3,7 +3,6 @@ package com.valtech.hotel.backend.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.valtech.hotel.backend.entity.Hotel;
-import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
@@ -12,7 +11,12 @@ import org.elasticsearch.common.settings.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
+
+import java.io.IOException;
+import java.nio.file.Path;
 
 @Repository
 public class HotelIndexRepository {
@@ -27,7 +31,7 @@ public class HotelIndexRepository {
     }
 
     public void add(Hotel hotel) {
-        LOG.info("adding beer to search index: %s\n", hotel);
+        LOG.info("adding hotel to search index: %s\n", hotel);
         IndexRequestBuilder indexRequestBuilder = elasticsearchClient.prepareIndex(HOTEL, TYPE, hotel.getId());
         try {
             indexRequestBuilder.setSource(objectMapper.writeValueAsBytes(hotel));
@@ -40,12 +44,16 @@ public class HotelIndexRepository {
     }
 
     public void createIndex() {
-        Settings indexSettings = Settings.builder()
-                .put("number_of_shards", 1)
-                .put("number_of_replicas", 0)
-                .build();
-        CreateIndexRequest indexRequest = new CreateIndexRequest(HOTEL, indexSettings);
-        elasticsearchClient.admin().indices().create(indexRequest).actionGet();
+        try {
+            Resource resource = new ClassPathResource("/hotels-settings.json");
+            Path path = resource.getFile().toPath();
+            Settings indexSettings = Settings.builder().loadFromPath(path).build();
+            elasticsearchClient.admin().indices().prepareCreate(HOTEL)
+                    .setSettings(indexSettings)
+                    .get();
+        } catch (IOException e) {
+            LOG.error("Unable to read settings file", e);
+        }
     }
 
     public void deleteIndex() {
