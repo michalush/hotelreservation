@@ -4,6 +4,7 @@ public class Hotel {
     private String id;
     private String name;
     private String description;
+    private int rating;
 
     public String getId() {
         return id;
@@ -29,12 +30,21 @@ public class Hotel {
         this.description = description;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
         return "Hotel{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", rating=" + rating +
                 '}';
     }
 }

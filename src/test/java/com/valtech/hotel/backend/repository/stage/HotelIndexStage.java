@@ -1,8 +1,9 @@
-package com.valtech.hotel.backend.repository;
+package com.valtech.hotel.backend.repository.stage;
 
 import com.tngtech.jgiven.Stage;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
 import com.valtech.hotel.backend.entity.Hotel;
+import com.valtech.hotel.backend.repository.HotelIndexRepository;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;

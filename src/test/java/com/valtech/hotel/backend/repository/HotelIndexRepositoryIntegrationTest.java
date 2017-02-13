@@ -3,6 +3,7 @@ package com.valtech.hotel.backend.repository;
 import com.tngtech.jgiven.annotation.JGivenConfiguration;
 import com.tngtech.jgiven.integration.spring.SimpleSpringRuleScenarioTest;
 import com.valtech.hotel.backend.entity.Hotel;
+import com.valtech.hotel.backend.repository.stage.HotelIndexStage;
 import com.valtech.hotel.spring.HotelTestApplicationConfiguration;
 import com.valtech.hotel.spring.HotelTestApplicationContext;
 import org.junit.After;

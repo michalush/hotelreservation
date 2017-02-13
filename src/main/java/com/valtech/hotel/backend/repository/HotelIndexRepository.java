@@ -17,8 +17,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class HotelIndexRepository {
     private static final Logger LOG = LoggerFactory.getLogger(HotelIndexRepository.class);
-    protected static final String HOTEL = "hotels";
-    protected static final String TYPE = "hotel";
+    public static final String HOTEL = "hotels";
+    public static final String TYPE = "hotel";
     private final Client elasticsearchClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
