@@ -11,28 +11,28 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @JGivenStage
-public class HotelSearchRepoStage extends Stage<HotelSearchRepoStage> {
+public class HotelIndexStage extends Stage<HotelIndexStage> {
     @Autowired
-    private HotelRepository hotelRepository;
+    private HotelIndexRepository hotelRepository;
     @Autowired
     private Client elasticsearchClient;
 
-    public HotelSearchRepoStage new_hotel_is_added(Hotel hotel) {
+    public HotelIndexStage new_hotel_is_added(Hotel hotel) {
         hotelRepository.add(hotel);
         return this;
     }
 
-    public HotelSearchRepoStage hotel_with_id_$1_exists(String id) {
+    public HotelIndexStage hotel_with_id_$1_exists(String id) {
         final GetResponse response = getHotelWithId(id);
         assertThat(response.isExists(), is(true));
         return this;
     }
 
     private GetResponse getHotelWithId(String id) {
-        return elasticsearchClient.prepareGet(HotelRepository.HOTEL, HotelRepository.TYPE, id).get();
+        return elasticsearchClient.prepareGet(HotelIndexRepository.HOTEL, HotelIndexRepository.TYPE, id).get();
     }
 
-    public HotelSearchRepoStage there_is_no_hotel_with_id(String id) {
+    public HotelIndexStage there_is_no_hotel_with_id(String id) {
         final GetResponse response = getHotelWithId(id);
         assertThat(response.isExists(), is(false));
         return this;

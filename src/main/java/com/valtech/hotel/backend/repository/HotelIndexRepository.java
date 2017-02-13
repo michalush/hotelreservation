@@ -15,14 +15,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class HotelRepository {
-    private static final Logger LOG = LoggerFactory.getLogger(HotelRepository.class);
+public class HotelIndexRepository {
+    private static final Logger LOG = LoggerFactory.getLogger(HotelIndexRepository.class);
     protected static final String HOTEL = "hotels";
     protected static final String TYPE = "hotel";
     private final Client elasticsearchClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public HotelRepository(@Autowired Client elasticsearchClient) {
+    public HotelIndexRepository(@Autowired Client elasticsearchClient) {
         this.elasticsearchClient = elasticsearchClient;
     }
 

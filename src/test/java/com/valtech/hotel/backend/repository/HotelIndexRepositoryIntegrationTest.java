@@ -15,10 +15,10 @@ import org.springframework.test.context.ActiveProfiles;
 @JGivenConfiguration(HotelTestApplicationConfiguration.class)
 @SpringBootTest(classes = { HotelTestApplicationContext.class } )
 @ActiveProfiles("local")
-public class HotelRepositoryIntegrationTest extends SimpleSpringRuleScenarioTest<HotelSearchRepoStage> {
+public class HotelIndexRepositoryIntegrationTest extends SimpleSpringRuleScenarioTest<HotelIndexStage> {
 
     @Autowired
-    private HotelRepository hotelRepository;
+    private HotelIndexRepository hotelRepository;
 
     @Before
     public void setUp() throws Exception {
