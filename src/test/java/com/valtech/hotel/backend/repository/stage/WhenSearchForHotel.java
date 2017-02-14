@@ -23,9 +23,24 @@ public class WhenSearchForHotel extends Stage<WhenSearchForHotel> {
     private List<Hotel> searchResult;
 
     public WhenSearchForHotel search_for_key_word_business() {
-        searchResult = hotelRepository.findHotel("business");
+        searchResult = findHotel("business");
 
         return this;
     }
 
+    public WhenSearchForHotel search_for_name_of_family_hotel() {
+        searchResult = findHotel(familyHotel.getName());
+
+        return this;
+    }
+
+    public WhenSearchForHotel search_for_empty_string() {
+        searchResult = findHotel("");
+
+        return this;
+    }
+
+    private List<Hotel> findHotel(String searchText) {
+        return hotelRepository.findHotel(searchText);
+    }
 }

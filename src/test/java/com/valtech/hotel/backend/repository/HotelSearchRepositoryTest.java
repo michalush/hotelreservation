@@ -33,6 +33,20 @@ public class HotelSearchRepositoryTest extends SpringRuleScenarioTest<GivenHotel
         then().only_hotel_with_keyword_business_in_the_description_is_found();
     }
 
+    @Test
+    public void search_in_name() throws Exception {
+        given().business_hotel_exists().and().family_hotel_exists();
+        when().search_for_name_of_family_hotel();
+        then().only_hotel_with_that_name_is_found();
+    }
+
+    @Test
+    public void search_by_empty_string() throws Exception {
+        given().business_hotel_exists().and().family_hotel_exists();
+        when().search_for_empty_string();
+        then().both_hotels_are_found();
+    }
+
     @AfterScenario
     public void tearDown() throws Exception {
         hotelRepository.deleteIndex();
