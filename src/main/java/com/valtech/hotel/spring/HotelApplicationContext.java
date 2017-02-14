@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 
 @Configuration
-@ComponentScan(basePackages = {"com.valtech.hotel"})
+@ComponentScan(basePackages = {"com.valtech.hotel.backend.repository"})
 public class HotelApplicationContext implements EnvironmentAware {
     private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HotelApplicationContext.class);
     private Environment env;

@@ -1,16 +1,19 @@
 package com.valtech.hotel.backend.entity;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 public class Hotel {
-    private String id;
+    private Integer id;
     private String name;
     private String description;
     private int rating;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -46,5 +49,25 @@ public class Hotel {
                 ", description='" + description + '\'' +
                 ", rating=" + rating +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+
+        if (!(o instanceof Hotel)) return false;
+
+        Hotel hotel = (Hotel) o;
+
+        return new EqualsBuilder()
+                .append(id, hotel.id)
+                .isEquals();
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+                .append(id)
+                .toHashCode();
     }
 }

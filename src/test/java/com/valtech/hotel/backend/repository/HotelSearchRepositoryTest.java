@@ -1,13 +1,14 @@
 package com.valtech.hotel.backend.repository;
 
+import com.tngtech.jgiven.annotation.AfterScenario;
+import com.tngtech.jgiven.annotation.BeforeScenario;
 import com.tngtech.jgiven.annotation.JGivenConfiguration;
-import com.tngtech.jgiven.integration.spring.SimpleSpringRuleScenarioTest;
-import com.valtech.hotel.backend.entity.Hotel;
-import com.valtech.hotel.backend.repository.stage.HotelIndexStage;
+import com.tngtech.jgiven.integration.spring.SpringRuleScenarioTest;
+import com.valtech.hotel.backend.repository.stage.GivenHotelStage;
+import com.valtech.hotel.backend.repository.stage.ThenHotelFound;
+import com.valtech.hotel.backend.repository.stage.WhenSearchForHotel;
 import com.valtech.hotel.spring.HotelTestApplicationConfiguration;
 import com.valtech.hotel.spring.HotelTestApplicationContext;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,28 +17,23 @@ import org.springframework.test.context.ActiveProfiles;
 @JGivenConfiguration(HotelTestApplicationConfiguration.class)
 @SpringBootTest(classes = { HotelTestApplicationContext.class } )
 @ActiveProfiles("local")
-public class HotelIndexRepositoryIntegrationTest extends SimpleSpringRuleScenarioTest<HotelIndexStage> {
-
+public class HotelSearchRepositoryTest extends SpringRuleScenarioTest<GivenHotelStage, WhenSearchForHotel, ThenHotelFound> {
     @Autowired
     private HotelIndexRepository hotelRepository;
 
-    @Before
+    @BeforeScenario
     public void setUp() throws Exception {
         hotelRepository.createIndex();
     }
 
     @Test
-    public void addHotelToRepository() throws Exception {
-        final Hotel hotel = new Hotel();
-        hotel.setId(1);
-        hotel.setName("Motel One");
-        hotel.setDescription("Perfect for business trips!");
-
-        given().there_is_no_hotel_with_id("1").
-        when().new_hotel_is_added(hotel).then().hotel_with_id_$1_exists("1");
+    public void search_in_description() throws Exception {
+        given().business_hotel_exists().and().family_hotel_exists();
+        when().search_for_key_word_business();
+        then().only_hotel_with_keyword_business_in_the_description_is_found();
     }
 
-    @After
+    @AfterScenario
     public void tearDown() throws Exception {
         hotelRepository.deleteIndex();
     }

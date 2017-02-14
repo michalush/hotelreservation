@@ -34,7 +34,7 @@ public class HotelIndexRepository {
 
     public void add(Hotel hotel) {
         LOG.info("adding hotel to search index: %s\n", hotel);
-        IndexRequestBuilder indexRequestBuilder = elasticsearchClient.prepareIndex(HOTEL, TYPE, hotel.getId());
+        IndexRequestBuilder indexRequestBuilder = elasticsearchClient.prepareIndex(HOTEL, TYPE, hotel.getId().toString());
         try {
             indexRequestBuilder.setSource(objectMapper.writeValueAsBytes(hotel));
             IndexResponse response = elasticsearchClient.index(indexRequestBuilder.request()).actionGet();
