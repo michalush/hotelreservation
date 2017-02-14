@@ -31,32 +31,6 @@
         }
       }
     }
-//    "mappings": {
-//      "hotel": {
-//        "properties": {
-//          "id": {
-//            "type": "integer"
-//          },
-//          "name": {
-//            "type": "text"
-//            //            "search_analyzer": "str_search_analyzer",
-//            //            "analyzer": "str_index_analyzer",
-//            //            "fields": {
-//            //              "keyword": {
-//            //                "type": "keyword"
-//            //              }
-//            //            }
-//          },
-//          "description": {
-//            "type": "text"
-//            //            "analyzer": "str_index_analyzer"
-//          },
-//          "rating": {
-//            "type": "integer"
-//          }
-//        }
-//      }
-//    }
   }
 }
 

@@ -3,6 +3,7 @@ package com.valtech.hotel.backend.repository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.valtech.hotel.backend.entity.Hotel;
+import org.apache.commons.io.FileUtils;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.index.IndexRequestBuilder;
 import org.elasticsearch.action.index.IndexResponse;
@@ -16,6 +17,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 
 @Repository
@@ -48,8 +50,13 @@ public class HotelIndexRepository {
             Resource resource = new ClassPathResource("/hotels-settings.json");
             Path path = resource.getFile().toPath();
             Settings indexSettings = Settings.builder().loadFromPath(path).build();
+
+            Resource mappingResource = new ClassPathResource("/hotels-mappings.json");
+            final String mappings = FileUtils.readFileToString(mappingResource.getFile(), StandardCharsets.UTF_8);
+
             elasticsearchClient.admin().indices().prepareCreate(HOTEL)
                     .setSettings(indexSettings)
+                    .addMapping("hotel", mappings)
                     .get();
         } catch (IOException e) {
             LOG.error("Unable to read settings file", e);
