@@ -1,8 +1,10 @@
 package com.valtech.hotel.spring;
 
+import com.valtech.hotel.frontend.AdminPage;
 import com.valtech.hotel.frontend.HotelSearchPage;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 
 /**
  * Application object for your web application.
@@ -29,7 +31,9 @@ public class WicketApplication extends WebApplication
 	{
 		super.init();
 
+		getComponentInstantiationListeners().add(new SpringComponentInjector(this));
+
 		mountPage("search", HotelSearchPage.class);
-		// add your configuration here
+		mountPage("admin", AdminPage.class);
 	}
 }

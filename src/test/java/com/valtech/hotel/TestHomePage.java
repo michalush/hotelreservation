@@ -1,6 +1,6 @@
 package com.valtech.hotel;
 
-import com.valtech.hotel.frontend.HomePage;
+import com.valtech.hotel.frontend.AdminPage;
 import com.valtech.hotel.spring.WicketApplication;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -23,9 +23,9 @@ public class TestHomePage
 	public void homepageRendersSuccessfully()
 	{
 		//start and render the test page
-		tester.startPage(HomePage.class);
+		tester.startPage(AdminPage.class);
 
 		//assert rendered page class
-		tester.assertRenderedPage(HomePage.class);
+		tester.assertRenderedPage(AdminPage.class);
 	}
 }
