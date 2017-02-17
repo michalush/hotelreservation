@@ -1,13 +1,13 @@
 package com.valtech.hotel.backend.repository.stage;
 
 import com.tngtech.jgiven.Stage;
+import com.tngtech.jgiven.annotation.ExpectedScenarioState;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
 import com.valtech.hotel.backend.entity.Hotel;
 import com.valtech.hotel.backend.repository.HotelIndexRepository;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -18,8 +18,10 @@ public class HotelIndexStage extends Stage<HotelIndexStage> {
     private HotelIndexRepository hotelRepository;
     @Autowired
     private Client elasticsearchClient;
+    @ExpectedScenarioState
+    private Hotel hotel;
 
-    public HotelIndexStage new_hotel_is_added(Hotel hotel) {
+    public HotelIndexStage new_hotel_is_added() {
         hotelRepository.add(hotel);
         return this;
     }
