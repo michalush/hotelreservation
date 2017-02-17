@@ -9,6 +9,8 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -19,10 +21,10 @@ public class HotelIndexStage extends Stage<HotelIndexStage> {
     @Autowired
     private Client elasticsearchClient;
     @ExpectedScenarioState
-    private Hotel hotel;
+    private List<Hotel> hotels;
 
     public HotelIndexStage new_hotel_is_added() {
-        hotelRepository.add(hotel);
+        hotelRepository.add(hotels.get(0));
         return this;
     }
 
@@ -39,6 +41,12 @@ public class HotelIndexStage extends Stage<HotelIndexStage> {
     public HotelIndexStage there_is_no_hotel_with_id(String id) {
         final GetResponse response = getHotelWithId(id);
         assertThat(response.isExists(), is(false));
+        return this;
+    }
+
+    public HotelIndexStage all_hotesl_are_added() {
+        hotelRepository.addHotels(hotels);
+
         return this;
     }
 }
