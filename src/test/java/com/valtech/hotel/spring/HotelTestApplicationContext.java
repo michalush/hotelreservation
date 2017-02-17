@@ -6,6 +6,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @EnableJGiven
-@ComponentScan
+@ComponentScan(basePackages = {"com.valtech.hotel.backend.*"})
 public class HotelTestApplicationContext extends HotelApplicationContext {
 }
