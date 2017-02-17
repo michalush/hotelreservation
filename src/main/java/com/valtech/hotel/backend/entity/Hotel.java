@@ -4,7 +4,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public class Hotel {
-    public static final String HOTEL = "hotels";
     public static final String TYPE = "hotel";
 
     private Integer id;

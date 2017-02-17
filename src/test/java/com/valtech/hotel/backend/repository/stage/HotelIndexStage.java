@@ -7,6 +7,7 @@ import com.valtech.hotel.backend.repository.HotelIndexRepository;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.Client;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -30,7 +31,7 @@ public class HotelIndexStage extends Stage<HotelIndexStage> {
     }
 
     private GetResponse getHotelWithId(String id) {
-        return elasticsearchClient.prepareGet(Hotel.HOTEL, Hotel.TYPE, id).get();
+        return hotelRepository.getHotelById(id);
     }
 
     public HotelIndexStage there_is_no_hotel_with_id(String id) {

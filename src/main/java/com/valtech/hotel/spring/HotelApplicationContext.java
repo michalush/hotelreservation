@@ -5,6 +5,8 @@ import org.elasticsearch.client.transport.TransportClient;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.transport.InetSocketTransportAddress;
 import org.elasticsearch.transport.client.PreBuiltTransportClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +23,7 @@ import java.net.InetSocketAddress;
 @Configuration
 @ComponentScan(basePackages = {"com.valtech.hotel.backend.*"})
 public class HotelApplicationContext implements EnvironmentAware {
-    private static final org.slf4j.Logger LOG = org.slf4j.LoggerFactory.getLogger(HotelApplicationContext.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HotelApplicationContext.class);
     private Environment env;
 
     @Bean(destroyMethod = "close")

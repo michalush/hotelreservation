@@ -12,6 +12,7 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
@@ -24,15 +25,17 @@ import java.util.List;
 public class HotelSearchRepository {
     private static final Logger LOG = LoggerFactory.getLogger(HotelSearchRepository.class);
     private final Client elasticsearchClient;
+    private final String indexName;
 
-    public HotelSearchRepository(@Autowired Client elasticsearchClient) {
+    public HotelSearchRepository(@Autowired Client elasticsearchClient, @Autowired Environment env) {
         this.elasticsearchClient = elasticsearchClient;
+        this.indexName = env.getProperty("index.name");
     }
 
     public List<Hotel> findHotel(String searchText) {
         List<Hotel> hotels = new ArrayList<Hotel>();
         final QueryBuilder matchQueryBuilder = createQuery(searchText);
-        final SearchResponse searchResponse = elasticsearchClient.prepareSearch(Hotel.HOTEL).setQuery(matchQueryBuilder)
+        final SearchResponse searchResponse = elasticsearchClient.prepareSearch(indexName).setQuery(matchQueryBuilder)
                 .addSort("rating", SortOrder.DESC).get();
 
         final SearchHits hits = searchResponse.getHits();

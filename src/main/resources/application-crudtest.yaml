@@ -5,4 +5,4 @@ elasticsearch:
   clusterName: es5-cluster
 
 index:
-  name: hotels
+  name: hotels-crud

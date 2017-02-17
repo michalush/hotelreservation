@@ -8,16 +8,16 @@ import com.valtech.hotel.spring.HotelTestApplicationConfiguration;
 import com.valtech.hotel.spring.HotelTestApplicationContext;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
-@Ignore
 @JGivenConfiguration(HotelTestApplicationConfiguration.class)
 @SpringBootTest(classes = { HotelTestApplicationContext.class } )
-@ActiveProfiles("local")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
+@ActiveProfiles("crudtest")
 public class HotelIndexRepositoryIntegrationTest extends SimpleSpringRuleScenarioTest<HotelIndexStage> {
 
     @Autowired
