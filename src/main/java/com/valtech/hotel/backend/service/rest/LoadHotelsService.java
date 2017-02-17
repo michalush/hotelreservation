@@ -1,4 +1,4 @@
-package com.valtech.hotel.backend.service;
+package com.valtech.hotel.backend.service.rest;
 
 import com.valtech.hotel.backend.entity.rest.RestHotel;
 import com.valtech.hotel.backend.entity.rest.Tixik;
@@ -16,12 +16,12 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
-public class ParseHotelsService {
-    private static final Logger LOG = LoggerFactory.getLogger(ParseHotelsService.class);
+public class LoadHotelsService {
+    private static final Logger LOG = LoggerFactory.getLogger(LoadHotelsService.class);
 
     private final RestTemplate restTemplate;
 
-    public ParseHotelsService(@Autowired RestTemplate restTemplate) {
+    public LoadHotelsService(@Autowired RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 

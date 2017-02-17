@@ -1,4 +1,4 @@
-package com.valtech.hotel.backend.service;
+package com.valtech.hotel.backend.service.rest;
 
 import com.valtech.hotel.backend.entity.rest.RestHotel;
 import com.valtech.hotel.spring.HotelTestApplicationContext;
@@ -17,9 +17,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = { HotelTestApplicationContext.class })
 @ActiveProfiles("local")
-public class ParseHotelsServiceTest {
+public class LoadHotelsServiceTest {
     @Autowired
-    private ParseHotelsService hotelsService;
+    private LoadHotelsService hotelsService;
 
     @Test
     public void test() throws Exception {

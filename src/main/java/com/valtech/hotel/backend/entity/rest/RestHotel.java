@@ -12,6 +12,7 @@ public class RestHotel implements Serializable {
 
     private int id;
     private String name;
+    private String description;
 
     public int getId() {
         return id;
@@ -29,5 +30,14 @@ public class RestHotel implements Serializable {
     @XmlElement(name = "name")
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @XmlElement(name = "description")
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
