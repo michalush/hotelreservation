@@ -1,6 +1,7 @@
 package com.valtech.hotel.backend.repository.stage;
 
 import com.tngtech.jgiven.Stage;
+import com.tngtech.jgiven.annotation.ExpectedScenarioState;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import com.tngtech.jgiven.annotation.ScenarioState;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
@@ -15,9 +16,9 @@ public class WhenSearchForHotel extends Stage<WhenSearchForHotel> {
     @Autowired
     private HotelSearchRepository hotelRepository;
 
-    @ProvidedScenarioState(resolution = ScenarioState.Resolution.NAME)
+    @ExpectedScenarioState(resolution = ScenarioState.Resolution.NAME)
     private Hotel businessHotel;
-    @ProvidedScenarioState(resolution = ScenarioState.Resolution.NAME)
+    @ExpectedScenarioState(resolution = ScenarioState.Resolution.NAME)
     private Hotel familyHotel;
     @ProvidedScenarioState
     private List<Hotel> searchResult;

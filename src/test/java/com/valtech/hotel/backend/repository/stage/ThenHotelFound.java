@@ -1,6 +1,7 @@
 package com.valtech.hotel.backend.repository.stage;
 
 import com.tngtech.jgiven.Stage;
+import com.tngtech.jgiven.annotation.ExpectedScenarioState;
 import com.tngtech.jgiven.annotation.ProvidedScenarioState;
 import com.tngtech.jgiven.annotation.ScenarioState;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
@@ -21,7 +22,7 @@ public class ThenHotelFound extends Stage<ThenHotelFound> {
     private Hotel businessHotel;
     @ProvidedScenarioState(resolution = ScenarioState.Resolution.NAME)
     private Hotel familyHotel;
-    @ProvidedScenarioState
+    @ExpectedScenarioState
     private List<Hotel> searchResult;
 
     public ThenHotelFound only_hotel_with_keyword_business_in_the_description_is_found() {
