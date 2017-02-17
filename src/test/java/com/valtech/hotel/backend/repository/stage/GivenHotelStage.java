@@ -22,7 +22,7 @@ public class GivenHotelStage extends Stage<GivenHotelStage> {
     public GivenHotelStage business_hotel_exists() {
         businessHotel = HotelBuilder.createHotel(1)
                 .withDetails("Motel One", "Perfect for business trip!")
-                .withRating(3)
+                .withRating(10)
                 .build();
         hotelRepository.add(businessHotel);
         return this;

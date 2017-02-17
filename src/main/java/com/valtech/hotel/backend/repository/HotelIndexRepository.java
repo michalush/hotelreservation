@@ -23,8 +23,6 @@ import java.nio.file.Path;
 @Repository
 public class HotelIndexRepository {
     private static final Logger LOG = LoggerFactory.getLogger(HotelIndexRepository.class);
-    public static final String HOTEL = "hotels";
-    public static final String TYPE = "hotel";
     private final Client elasticsearchClient;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -34,7 +32,7 @@ public class HotelIndexRepository {
 
     public void add(Hotel hotel) {
         LOG.info("adding hotel to search index: %s\n", hotel);
-        IndexRequestBuilder indexRequestBuilder = elasticsearchClient.prepareIndex(HOTEL, TYPE, hotel.getId().toString());
+        IndexRequestBuilder indexRequestBuilder = elasticsearchClient.prepareIndex(Hotel.HOTEL, Hotel.TYPE, hotel.getId().toString());
         try {
             indexRequestBuilder.setSource(objectMapper.writeValueAsBytes(hotel));
             IndexResponse response = elasticsearchClient.index(indexRequestBuilder.request()).actionGet();
@@ -54,7 +52,7 @@ public class HotelIndexRepository {
             Resource mappingResource = new ClassPathResource("/hotels-mappings.json");
             final String mappings = FileUtils.readFileToString(mappingResource.getFile(), StandardCharsets.UTF_8);
 
-            elasticsearchClient.admin().indices().prepareCreate(HOTEL)
+            elasticsearchClient.admin().indices().prepareCreate(Hotel.HOTEL)
                     .setSettings(indexSettings)
                     .addMapping("hotel", mappings)
                     .get();
@@ -64,7 +62,7 @@ public class HotelIndexRepository {
     }
 
     public void deleteIndex() {
-        DeleteIndexRequest indexRequest = new DeleteIndexRequest(HOTEL);
+        DeleteIndexRequest indexRequest = new DeleteIndexRequest(Hotel.HOTEL);
         elasticsearchClient.admin().indices().delete(indexRequest).actionGet();
     }
 }

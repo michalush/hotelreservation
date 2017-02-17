@@ -30,7 +30,7 @@ public class HotelIndexStage extends Stage<HotelIndexStage> {
     }
 
     private GetResponse getHotelWithId(String id) {
-        return elasticsearchClient.prepareGet(HotelIndexRepository.HOTEL, HotelIndexRepository.TYPE, id).get();
+        return elasticsearchClient.prepareGet(Hotel.HOTEL, Hotel.TYPE, id).get();
     }
 
     public HotelIndexStage there_is_no_hotel_with_id(String id) {

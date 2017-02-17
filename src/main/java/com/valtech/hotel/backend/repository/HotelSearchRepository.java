@@ -8,6 +8,7 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.valtech.hotel.backend.repository.HotelIndexRepository.HOTEL;
 
 @Repository
 public class HotelSearchRepository {
@@ -32,7 +32,8 @@ public class HotelSearchRepository {
     public List<Hotel> findHotel(String searchText) {
         List<Hotel> hotels = new ArrayList<Hotel>();
         final QueryBuilder matchQueryBuilder = createQuery(searchText);
-        final SearchResponse searchResponse = elasticsearchClient.prepareSearch(HOTEL).setQuery(matchQueryBuilder).get();
+        final SearchResponse searchResponse = elasticsearchClient.prepareSearch(Hotel.HOTEL).setQuery(matchQueryBuilder)
+                .addSort("rating", SortOrder.DESC).get();
 
         final SearchHits hits = searchResponse.getHits();
         for (SearchHit hit : hits.getHits()) {

@@ -47,6 +47,14 @@ public class HotelSearchRepositoryTest extends SpringRuleScenarioTest<GivenHotel
         then().both_hotels_are_found();
     }
 
+    @Test
+    public void search_and_sort() throws Exception {
+        given().business_hotel_exists().and().family_hotel_exists();
+        when().search_for_empty_string();
+        then().both_hotels_are_found().and()
+                .they_are_ordered_by_rating();
+    }
+
     @AfterScenario
     public void tearDown() throws Exception {
         hotelRepository.deleteIndex();

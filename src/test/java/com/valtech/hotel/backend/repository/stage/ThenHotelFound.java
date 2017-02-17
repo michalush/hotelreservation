@@ -6,7 +6,10 @@ import com.tngtech.jgiven.annotation.ScenarioState;
 import com.tngtech.jgiven.integration.spring.JGivenStage;
 import com.valtech.hotel.backend.entity.Hotel;
 import org.hamcrest.Matcher;
+import org.hamcrest.Matchers;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -49,5 +52,29 @@ public class ThenHotelFound extends Stage<ThenHotelFound> {
 
     private void assertListSize(Matcher<Integer> matcher) {
         assertThat(searchResult.size(), matcher);
+    }
+
+    public ThenHotelFound they_are_ordered_by_rating() {
+        List<Hotel> expected = new ArrayList<Hotel>(searchResult);
+        expected.sort(new HotelRatingComparator());
+
+        assertThat(searchResult, Matchers.contains(expected.toArray()));
+
+        return this;
+    }
+
+    private class HotelRatingComparator implements Comparator<Hotel> {
+        @Override
+        public int compare(Hotel o1, Hotel o2) {
+            if (o1.getRating() > o2.getRating()) {
+                return -1;
+            }
+
+            if (o2.getRating() < o1.getRating()) {
+                return 1;
+            }
+
+            return 0;
+        }
     }
 }
