@@ -4,11 +4,14 @@ import com.valtech.hotel.frontend.AdminPage;
 import com.valtech.hotel.spring.WicketApplication;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * Simple test using the WicketTester
  */
+
+@Ignore
 public class TestHomePage
 {
 	private WicketTester tester;
