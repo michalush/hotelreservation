@@ -2,6 +2,7 @@ package com.valtech.hotel.backend.entity;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.elasticsearch.common.geo.GeoPoint;
 
 public class Hotel {
     public static final String TYPE = "hotel";
@@ -10,6 +11,7 @@ public class Hotel {
     private String name;
     private String description;
     private int rating;
+    private GeoPoint location;
 
     public Integer getId() {
         return id;
@@ -41,6 +43,14 @@ public class Hotel {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public GeoPoint getLocation() {
+        return location;
+    }
+
+    public void setLocation(GeoPoint location) {
+        this.location = location;
     }
 
     @Override

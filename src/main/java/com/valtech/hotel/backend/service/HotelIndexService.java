@@ -42,6 +42,7 @@ public class HotelIndexService {
     private Hotel transformHotel(RestHotel restHotel) {
         return HotelBuilder.createHotel(restHotel.getId())
                 .withDetails(restHotel.getName(), restHotel.getDescription())
+                .withLocation(restHotel.getGps_x(), restHotel.getGps_y())
                 .withRating(createRandomValue()).build();
     }
 
