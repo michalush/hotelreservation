@@ -1,5 +1,6 @@
 package com.valtech.hotel.backend.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.elasticsearch.common.geo.GeoPoint;
@@ -11,7 +12,8 @@ public class Hotel {
     private String name;
     private String description;
     private int rating;
-    private GeoPoint location;
+    private GeoPoint geoPoint;
+    private Location location;
 
     public Integer getId() {
         return id;
@@ -45,11 +47,19 @@ public class Hotel {
         this.rating = rating;
     }
 
-    public GeoPoint getLocation() {
+    public GeoPoint getGeoPoint() {
+        return geoPoint;
+    }
+
+    public void setGeoPoint(GeoPoint geoPoint) {
+        this.geoPoint = geoPoint;
+    }
+
+    public Location getLocation() {
         return location;
     }
 
-    public void setLocation(GeoPoint location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -81,5 +91,49 @@ public class Hotel {
         return new HashCodeBuilder(17, 37)
                 .append(id)
                 .toHashCode();
+    }
+
+    public void setLocationDetails(Double gps_x, Double gps_y) {
+        setGeoPoint(new GeoPoint(gps_x, gps_y));
+        setLocation(new Location(gps_x, gps_y));
+    }
+
+    public static class Location {
+
+        private Double lat;
+        private Double lon;
+
+        public Location() {
+
+        }
+
+        public Location(Double lat, Double lon) {
+
+            this.lat = lat;
+            this.lon = lon;
+        }
+
+        public Double getLat() {
+            return lat;
+        }
+
+        public void setLat(Double lat) {
+            this.lat = lat;
+        }
+
+        public Double getLon() {
+            return lon;
+        }
+
+        public void setLon(Double lon) {
+            this.lon = lon;
+        }
+
+        @JsonIgnore
+        public String getGeohash() {
+
+            return new org.elasticsearch.common.geo.GeoPoint(this.lat, this.lon).getGeohash();
+        }
+
     }
 }

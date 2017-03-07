@@ -20,6 +20,9 @@
       },
       "rating": {
         "type": "integer"
+      },
+      "location": {
+        "type": "geo_point"
       }
     }
   }
