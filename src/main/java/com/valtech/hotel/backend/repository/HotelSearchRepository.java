@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.valtech.hotel.backend.entity.Hotel;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.Client;
+import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
@@ -32,11 +33,12 @@ public class HotelSearchRepository {
         this.indexName = env.getProperty("index.name");
     }
 
-    public List<Hotel> findHotel(String searchText) {
+    public List<Hotel> findHotel(String searchText, String sortOrder) {
         List<Hotel> hotels = new ArrayList<Hotel>();
         final QueryBuilder matchQueryBuilder = createQuery(searchText);
         final SearchResponse searchResponse = elasticsearchClient.prepareSearch(indexName).setQuery(matchQueryBuilder)
-                .addSort("rating", SortOrder.DESC).get();
+                .addSort(sortOrder, SortOrder.DESC)
+                .get();
 
         final SearchHits hits = searchResponse.getHits();
         for (SearchHit hit : hits.getHits()) {
@@ -56,6 +58,6 @@ public class HotelSearchRepository {
         if (StringUtils.isEmpty(searchText)) {
             return QueryBuilders.matchAllQuery();
         }
-        return QueryBuilders.multiMatchQuery(searchText, "name", "description");
+        return QueryBuilders.multiMatchQuery(searchText, "name", "description").type(MultiMatchQueryBuilder.Type.MOST_FIELDS);
     }
 }

@@ -6,7 +6,8 @@ import com.valtech.hotel.frontend.stages.ThenVerifySearchResult;
 import com.valtech.hotel.frontend.stages.WhenUserSearches;
 import org.junit.Ignore;
 import org.junit.Test;
- @Ignore
+
+@Ignore
 public class HotelSearchPageTest extends ScenarioTest<GivenUserOnHotelPage, WhenUserSearches, ThenVerifySearchResult> {
 
     @Test

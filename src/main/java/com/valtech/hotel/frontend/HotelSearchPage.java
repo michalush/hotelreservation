@@ -12,6 +12,7 @@ import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.util.StringUtils;
 
 import java.util.List;
 
@@ -46,7 +47,13 @@ public class HotelSearchPage extends WebPage {
 	private class HotelsModel extends LoadableDetachableModel<List<Hotel>> {
 		@Override
         protected List<Hotel> load() {
-            return repository.findHotel(searchTerm);
+			String orderColumn = "_score";
+
+			if (StringUtils.isEmpty(searchTerm)) {
+				orderColumn = "rating";
+			}
+
+			return repository.findHotel(searchTerm, orderColumn);
         }
 	}
 }

@@ -42,6 +42,6 @@ public class WhenSearchForHotel extends Stage<WhenSearchForHotel> {
     }
 
     private List<Hotel> findHotel(String searchText) {
-        return hotelRepository.findHotel(searchText);
+        return hotelRepository.findHotel(searchText, "rating");
     }
 }
