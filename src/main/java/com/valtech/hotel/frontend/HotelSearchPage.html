@@ -1,12 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <style>
+        .search {
+            width: 500px;
+            height: 50px;
+            background: #2b303b;
+            border: none;
+            font-size: 10pt;
+            float: left;
+            color: #eeeeee;
+            padding-left: 45px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        .hotel-container {
+            width: 800px;
+            background: #eeeeee;
+            border: none;
+            font-size: 10pt;
+            float: left;
+            color: #092E67;
+            padding: 15px;
+            margin: 10px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+        }
+
+        li {list-style-type: none;}
+    </style>
+</head>
 <body>
-<form wicket:id="searchForm">
-    <input wicket:id="search"/>
-</form>
+<div style="display: -webkit-flex; text-align: center">
+    <h1 style="color: #092E67">Looking for a nice hotel?</h1>
+    <form wicket:id="searchForm" style="padding-left: 2em; padding-top: 1em; font-size: 14pt;">
+        <input wicket:id="search" type="text" placeholder="Search..." class="search">
+    </form>
+</div>
 <div wicket:id="hotelsContainer">
     <ul wicket:id="hotels">
-        <li wicket:id="hotel"></li>
+        <li wicket:id="hotel" class="hotel-container"></li>
     </ul>
 </div>
 
