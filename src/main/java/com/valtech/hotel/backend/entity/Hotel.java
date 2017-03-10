@@ -1,19 +1,25 @@
 package com.valtech.hotel.backend.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.elasticsearch.common.geo.GeoPoint;
 
-public class Hotel {
+import java.io.Serializable;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class Hotel implements Serializable {
     public static final String TYPE = "hotel";
 
     private Integer id;
     private String name;
     private String description;
     private int rating;
-    private GeoPoint geoPoint;
+//    private GeoPoint geoPoint;
     private Location location;
+
+    public Hotel() {
+    }
 
     public Integer getId() {
         return id;
@@ -47,13 +53,13 @@ public class Hotel {
         this.rating = rating;
     }
 
-    public GeoPoint getGeoPoint() {
-        return geoPoint;
-    }
-
-    public void setGeoPoint(GeoPoint geoPoint) {
-        this.geoPoint = geoPoint;
-    }
+//    public GeoPoint getGeoPoint() {
+//        return geoPoint;
+//    }
+//
+//    public void setGeoPoint(GeoPoint geoPoint) {
+//        this.geoPoint = geoPoint;
+//    }
 
     public Location getLocation() {
         return location;
@@ -94,17 +100,16 @@ public class Hotel {
     }
 
     public void setLocationDetails(Double gps_x, Double gps_y) {
-        setGeoPoint(new GeoPoint(gps_x, gps_y));
+//        setGeoPoint(new GeoPoint(gps_x, gps_y));
         setLocation(new Location(gps_x, gps_y));
     }
 
-    public static class Location {
+    public static class Location implements Serializable {
 
         private Double lat;
         private Double lon;
 
         public Location() {
-
         }
 
         public Location(Double lat, Double lon) {

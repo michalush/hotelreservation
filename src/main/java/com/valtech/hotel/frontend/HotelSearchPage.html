@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
 <body>
-   <input wicket:id="mainsearch" />
+<form wicket:id="searchForm">
+    <input wicket:id="search"/>
+</form>
+<div wicket:id="hotelsContainer">
+    <ul wicket:id="hotels">
+        <li wicket:id="hotel"></li>
+    </ul>
+</div>
 
-   <div wicket:id="hotels"></div>
 </body>
 </html>
