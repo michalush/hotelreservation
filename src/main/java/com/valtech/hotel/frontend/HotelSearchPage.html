@@ -5,7 +5,7 @@
         .search {
             width: 500px;
             height: 50px;
-            background: #2b303b;
+            background: #8d6e63;
             border: none;
             font-size: 10pt;
             float: left;
@@ -18,11 +18,11 @@
 
         .hotel-container {
             width: 800px;
-            background: #eeeeee;
+            background: #ffe082;
             border: none;
             font-size: 10pt;
             float: left;
-            color: #092E67;
+            color: #3e2723;
             padding: 15px;
             margin: 10px;
             -webkit-border-radius: 5px;
@@ -31,11 +31,15 @@
         }
 
         li {list-style-type: none;}
+
+        body {
+            background-color: #ffecb3;
+        }
     </style>
 </head>
 <body>
 <div style="display: -webkit-flex; text-align: center">
-    <h1 style="color: #092E67">Looking for a nice hotel?</h1>
+    <h1 style="color:#8d6e63">Looking for a nice hotel?</h1>
     <form wicket:id="searchForm" style="padding-left: 2em; padding-top: 1em; font-size: 14pt;">
         <input wicket:id="search" type="text" placeholder="Search..." class="search">
     </form>
