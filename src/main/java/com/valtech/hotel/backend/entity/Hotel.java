@@ -15,7 +15,6 @@ public class Hotel implements Serializable {
     private String name;
     private String description;
     private int rating;
-//    private GeoPoint geoPoint;
     private Location location;
 
     public Hotel() {
@@ -52,14 +51,6 @@ public class Hotel implements Serializable {
     public void setRating(int rating) {
         this.rating = rating;
     }
-
-//    public GeoPoint getGeoPoint() {
-//        return geoPoint;
-//    }
-//
-//    public void setGeoPoint(GeoPoint geoPoint) {
-//        this.geoPoint = geoPoint;
-//    }
 
     public Location getLocation() {
         return location;
@@ -100,7 +91,6 @@ public class Hotel implements Serializable {
     }
 
     public void setLocationDetails(Double gps_x, Double gps_y) {
-//        setGeoPoint(new GeoPoint(gps_x, gps_y));
         setLocation(new Location(gps_x, gps_y));
     }
 
